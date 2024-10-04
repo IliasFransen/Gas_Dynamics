@@ -65,20 +65,32 @@ def Main(M_0,phi_0,g,P_a,n):
     val_BC = np.hstack((val_4, xy_bc))
 
     #calculate points in 5
-    val_5 = val_BC
-    CE = np.array([val_5[-1]])
+    val_5 = np.zeros((n,n,6))
+    #first row is just BC
+    for i in range(n):
+        val_5[0][i] = val_BC[i]
 
-    for j in range(n-2):
-        sym_val = region5_sym(val_5[j+1-n][4],val_5[j+1-n][5],0,val_5[j+1-n][0]+val_5[j+1-n][2],0,g,val_5[j+1-n][3],val_5[j+1-n][2])
-        #x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c
-        val_5 = np.vstack(val_5, sym_val)
+    for j in range(1,n):
 
-        nest_var = np.zeros((n-j-2,6))
-        for i in range(n-j-2):
-            nest_var[i] = region5_gen(val_5[-1][4],val_5[-1][5],val_5[j+1-n+i][4],val_5[j+1-n+i][5],val_5[-1][0]-val_5[-1][2],val_5[j+1-n+i][0]+val_5[j+1-n+i][2],val_5[-1][3],g,val_5[-1][2],val_5[j+1-n+i][2],val_5[j+1-n+i][3])
-            #x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, mu_d
-        CE = np.vstack(CE, nest_var[-1])
-        val_5 = np.vstack(val_5, nest_var)
+        for i in range(j,n):
+
+            if i==j:
+                #x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c
+                val_5[j][i] = np.array(region5_sym(val_5[j-1][i][4], val_5[j-1][i][5], 0, val_5[j-1][i][0]+val_5[j-1][i][2], 0, g, val_5[j-1][i][3], val_5[j-1][i][2]))
+            else:
+                #x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, mu_d
+                val_5[j][i] = np.array(region5_gen(val_5[j][i-1][4], val_5[j][i-1][5], val_5[j-1][i][4], val_5[j-1][i][5], val_5[j][i-1][0]-val_5[j][i-1][2], val_5[j-1][i][0]+val_5[j-1][i][2], val_5[j][i-1][3], g, val_5[j][i-1][2], val_5[j-1][i][2], val_5[j-1][i][3]))
+
+    #calculate location of D
+    #Gamma_plus_angle_1, x_C, y_C, y_A, x_A, phi_1
+    x_D, y_D = coord_D(Val_1[7], val_5[0][n][4], val_5[0][n][5], y_A, x_A, Val_1[2])
+
+    #get values in DF
+    #take last column of 5, swap x and y with location from function
+    val_DF = np.zeros((n,6))
+    for i in range(n):
+        #x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a
+        val_DF[i] = np.vstack(val_5[i][n][0:-3],point_DF(x_D, y_D, Val_1[6], val_5[i][n][-2],val_5[i][n][-1],val_5[i][n][2]+val_5[i][n][3]) )
 
 
     
@@ -88,5 +100,5 @@ def Main(M_0,phi_0,g,P_a,n):
 
 #
 
-if __name__ == "__main__":
+if __name__ == "__main__" :
     Main(M_0,phi_0,g,P_a,n) 

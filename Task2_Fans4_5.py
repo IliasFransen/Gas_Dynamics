@@ -55,7 +55,7 @@ def region5_sym (x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c):
     slope_ca = math.tan((-mu_a-mu_c+phi_c+phi_a)/2)
     x_a = ((y_a-y_c)/slope_ca+x_c)
     V_plus_a = V_plus(phi_a,nu_a)
-    return x_a, y_a, mu_a, nu_a, M_a, V_plus_a
+    return nu_a, M_a, 0, mu_a, x_a, y_a
 
 #calculate a point in 5, NOT on the symmetry line
 #d is above, a is below
@@ -72,7 +72,7 @@ def region5_gen (x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, m
     #get intersection point
     x_b = (slope_a*x_a-y_a-slope_d*x_d+y_d)/(slope_a-slope_d)
     y_b = slope_a*(x_b-x_a)+y_a
-    return x_b, y_b, mu_b, nu_b, M_b, phi_b, V_plus_b, V_min_b
+    return  nu_b, M_b, phi_b, mu_b, x_b, y_b
 
 #calculate point C
 #the coordinate of C can be found by picking a point the rightmost characteristic of fan 4 (has the same values as region 1)

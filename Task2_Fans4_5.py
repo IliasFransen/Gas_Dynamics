@@ -8,24 +8,26 @@ from Task2_Regions import region_0, region_1, region_2, region_3
 
 
 #define system to be solved for region 4
-def system4 (nu_p, mu_p, M_p, phi_p, V_plus_0, g, delta):
+def system4 (vars, V_plus_0, g, delta):
     #make a system for fsolve to solve
+    nu_p, mu_p, M_p, phi_p = vars
+
     eq = (V_plus_0 - (nu_p - phi_p),
           phi_p - nu_p - delta, 
-          mu_p - math.asin(1/M_p), 
-          mach_number_nu(nu_p,g) - M_p)
+          math.sin(mu_p) - (1/M_p), 
+          math.sqrt((g+1)/(g-1))*math.atan(math.sqrt((g-1)/(g+1)*(M_p**2-1)))-math.atan(math.sqrt(M_p**2-1)) - nu_p)
     return eq
 
     
 #calculate any point in 4
-def region4 (V_plus_0, g, delta):
+def region4 ( V_plus_0, g, delta):
     #initial guess
     mu_p_ini = 0.1
     nu_p_ini = 0.1
     M_p_ini = 1.5
     phi_p_ini = 0.1
     #solve system
-    mu_p, nu_p, M_p, phi_p = fsolve(system4, (nu_p_ini, mu_p_ini, M_p_ini, phi_p_ini), args=(V_plus_0, g, delta))
+    nu_p, mu_p, M_p, phi_p = fsolve(system4, [nu_p_ini, mu_p_ini, M_p_ini, phi_p_ini], args=(V_plus_0, g, delta))
     return nu_p, M_p, phi_p, mu_p
 
 print(region4(0,1.4,0.1))
@@ -37,7 +39,8 @@ def coord_B(y_A,M_0,phi_0,g,P_0, Gamma_min_angle_0):
     y_B = 0
     return x_B, y_B
 
-#calculates locaitons on BC
+#calculate a point on BC
+#B is just the previous point, moves along with the characteristics
 def point_BC (x_B, y_B, y_A, x_A, delta_p, Gamma_plus_angle_0):
     x_P = (y_B - y_A + math.tan(delta_p)*x_A-math.tan(Gamma_plus_angle_0)*x_A)/(-math.tan(Gamma_plus_angle_0)+math.tan(delta_p))
     y_P = math.tan(Gamma_plus_angle_0)*(x_P-x_A)+y_A

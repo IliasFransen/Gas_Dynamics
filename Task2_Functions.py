@@ -40,7 +40,7 @@ def func(M,nu,g):
 #calculates mach number from prandtl-meyer angle
 def mach_number_nu(nu,g):
     #numerically solve for M
-    M = fsolve(func, 1.5, args=(nu,g))
+    M = fsolve(func, 1.5, args=(nu,1.4))
     return M
 
 #print(mach_number_nu(prandtl_meyer_angle(2,1.4),1.4)) CHECK

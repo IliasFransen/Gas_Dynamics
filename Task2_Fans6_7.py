@@ -19,7 +19,6 @@ def coord_D (Gamma_plus_angle_1, x_C, y_C, y_A, x_A, phi_1):
     return x_D, y_D
 
 #find values along DF
-#D is just the previous point, moves along with the characteristics
 def point_DF (x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a):
     #use the point a, where characteristics meet line CE
     slope_a = math.tan(Gamma_plus_angle_a)

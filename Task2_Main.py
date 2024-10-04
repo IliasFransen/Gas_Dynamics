@@ -65,13 +65,26 @@ def Main(M_0,phi_0,g,P_a,n):
     val_BC = np.hstack((val_4, xy_bc))
 
     #calculate points in 5
+    val_5 = val_BC
+    CE = np.array([val_5[-1]])
+
+    for j in range(n-2):
+        sym_val = region5_sym(val_5[j+1-n][4],val_5[j+1-n][5],0,val_5[j+1-n][0]+val_5[j+1-n][2],0,g,val_5[j+1-n][3],val_5[j+1-n][2])
+        #x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c
+        val_5 = np.vstack(val_5, sym_val)
+
+        nest_var = np.zeros((n-j-2,6))
+        for i in range(n-j-2):
+            nest_var[i] = region5_gen(val_5[-1][4],val_5[-1][5],val_5[j+1-n+i][4],val_5[j+1-n+i][5],val_5[-1][0]-val_5[-1][2],val_5[j+1-n+i][0]+val_5[j+1-n+i][2],val_5[-1][3],g,val_5[-1][2],val_5[j+1-n+i][2],val_5[j+1-n+i][3])
+            #x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, mu_d
+        CE = np.vstack(CE, nest_var[-1])
+        val_5 = np.vstack(val_5, nest_var)
 
 
-#one lines in 4, all values are the same
+    
 
-#calculate BC
 
-#calculate region 5
+    #from endpoints 
 
 #
 

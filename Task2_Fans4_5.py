@@ -37,8 +37,7 @@ def coord_B(y_A,M_0,phi_0,g,P_0, Gamma_min_angle_0):
     y_B = 0
     return x_B, y_B
 
-#calculate a point on BC
-#B is just the previous point, moves along with the characteristics
+#calculates locaitons on BC
 def point_BC (x_B, y_B, y_A, x_A, delta_p, Gamma_plus_angle_0):
     x_P = (y_B - y_A + math.tan(delta_p)*x_A-math.tan(Gamma_plus_angle_0)*x_A)/(-math.tan(Gamma_plus_angle_0)+math.tan(delta_p))
     y_P = math.tan(Gamma_plus_angle_0)*(x_P-x_A)+y_A

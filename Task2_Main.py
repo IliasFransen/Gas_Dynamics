@@ -64,6 +64,8 @@ def Main(M_0,phi_0,g,P_a,n):
     
     val_BC = np.hstack((val_4, xy_bc))
 
+    #calculate points in 5
+
 
 #one lines in 4, all values are the same
 

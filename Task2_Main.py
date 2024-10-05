@@ -25,7 +25,7 @@ n=4
 
 
 
-def Main(M_0,phi_0,g,P_a,n):
+def Calculator(M_0,phi_0,g,P_a,n):
 
     #CALCULATE ADDITIONAL PARAMETERS
     P_0 = 2*P_a
@@ -123,10 +123,24 @@ def Main(M_0,phi_0,g,P_a,n):
         val_HK[i] = np.vstack(val_7[i][n][0:-3],pointHK(x_H, y_H, Val_2[3], Val_2[5], Val_2[2], val_7[i][n][0], val_7[i][n][1], val_7[i][n][2], val_7[i][n][3], val_7[i][n][4], g) )
     
     #calculate region 9
+    #similar to 5
 
+    val_9 = np.zeros((n,n,6))
+    #first row is just HK
+    for i in range(n):
+        val_9[0][i] = val_HK[i]
+    
+    for j in range(1,n):
+
+        for i in range(j,n):
+
+            if i==j:
+                #x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c
+                val_9[j][i] = np.array(region9_sym(val_9[j-1][i][0], val_9[j-1][i][1], 0, val_9[j-1][i][4], val_9[j-1][i][2], g, val_9[j-1][i][3], val_9[j-1][i][2]))
+            else:
+                #x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, mu_d
+                val_9[j][i] = np.array(region9_gen(val_9[j][i-1][0], val_9[j][i-1][1], val_9[j-1][i][0], val_9[j-1][i][1], val_9[j][i-1][4], val_9[j-1][i][4], val_9[j][i-1][3], g, val_9[j][i-1][2], val_9[j-1][i][2], val_9[j-1][i][3]))
      
 
 
-
-if __name__ == "__main__" :
-    Main(M_0,phi_0,g,P_a,n) 
+    #do something for region 11

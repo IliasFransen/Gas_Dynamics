@@ -16,7 +16,7 @@ def region4 ( V_plus_0, g, phi_p):
 
 
 #calcuate Coordinate of B
-def coord_B(y_A,M_0,phi_0,g,P_0, Gamma_min_angle_0):
+def coord_B(y_A, Gamma_min_angle_0):
     #calculate location of B
     x_B = (0-y_A)/math.tan(Gamma_min_angle_0)
     y_B = 0
@@ -41,8 +41,9 @@ def region5_sym (x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c):
     mu_a = math.asin(1/M_a)
     slope_ca = math.tan((-mu_a-mu_c+phi_c+phi_a)/2)
     x_a = ((y_a-y_c)/slope_ca+x_c)
-    V_plus_a = V_plus(phi_a,nu_a)
     return nu_a, M_a, 0, mu_a, x_a, y_a
+
+print(region5_sym(1,1,1,1,1,1,1,1)) #CHECK
 
 #calculate a point in 5, NOT on the symmetry line
 #d is above, a is below
@@ -51,8 +52,6 @@ def region5_gen (x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, m
     phi_b = (V_min_d-V_plus_a)/2
     M_b = mach_number_nu(nu_b,g)
     mu_b = math.asin(1/M_b)
-    V_plus_b = V_plus(phi_b,nu_b)
-    V_min_b = V_min(phi_b,nu_b)
     #get slopes of a and d
     slope_a = math.tan((mu_a+mu_b+phi_a+phi_b)/2)
     slope_d = math.tan((-mu_b-mu_d+phi_b+phi_d)/2)

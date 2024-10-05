@@ -14,28 +14,28 @@ def total_pressure(P, M,g):
 
 #calculates mach number from pressure
 def mach_number_pres(P_t, P,g):
-    M = math.sqrt((2/(g-1))*((P_t/P)**((g-1)/g)-1))
+    M = ((2/(g-1))*((P_t/P)**((g-1)/g)-1))**0.5
     return M
 
 #print(mach_number_pres(total_pressure(1000,2,1.4),1000,1.4)) CHECK
 
 #calculates the mach angle
 def mach_angle(M):
-    mu = math.asin(1/M)
-    return mu
+    mu = np.asin(1/M)
+    return float(mu)
 
 #print(mach_angle(2)) CHECK
 
 #calculates prandtl-meyer angle
 def prandtl_meyer_angle(M,g):
-    nu = math.sqrt((g+1)/(g-1))*math.atan(math.sqrt((g-1)/(g+1)*(M**2-1)))-math.atan(math.sqrt(M**2-1))
-    return nu
+    nu = ((g+1)/(g-1))**0.5 * np.atan(math.sqrt((g-1)/(g+1)*(M**2-1)))-np.atan(np.sqrt(M**2-1))
+    return float(nu)
 
 #print(prandtl_meyer_angle(2,1.4)) CHECK
 
 #define function for fsolve
 def func(M,nu,g):
-    return math.sqrt((g+1)/(g-1))*math.atan(math.sqrt((g-1)/(g+1)*(M**2-1)))-math.atan(math.sqrt(M**2-1)) - nu
+    return np.sqrt((g+1)/(g-1))*np.atan(np.sqrt((g-1)/(g+1)*(M**2-1)))-np.atan(np.sqrt(M**2-1)) - nu
 
 #calculates mach number from prandtl-meyer angle
 def mach_number_nu(nu,g):

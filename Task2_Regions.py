@@ -71,3 +71,5 @@ def region_10 (phi_10, V_min_3,g):
     mu_10 = mach_angle(M_10)
     phi_10
     return nu_10, M_10, phi_10, mu_10, V_min_10, V_plus_10, Gamma_plus_angle_10, Gamma_min_angle_10
+
+#print(region_10(0,0.0.5,1.4)) CHECK

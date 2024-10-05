@@ -43,7 +43,7 @@ def region5_sym (x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c):
     x_a = ((y_a-y_c)/slope_ca+x_c)
     return nu_a, M_a, 0, mu_a, x_a, y_a
 
-print(region5_sym(1,1,1,1,1,1,1,1)) #CHECK
+
 
 #calculate a point in 5, NOT on the symmetry line
 #d is above, a is below

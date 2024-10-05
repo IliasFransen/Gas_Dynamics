@@ -6,7 +6,7 @@ from scipy.optimize import fsolve
 from Task2_Functions import total_pressure, mach_number_pres, mach_angle, prandtl_meyer_angle, func, mach_number_nu, V_plus, V_min, Gamma_plus_angle, Gamma_min_angle
 from Task2_Regions import region_0, region_1, region_2, region_3, region_10
 from Task2_Fans4_5 import coord_B, system4, region4, point_BC, region5_sym, region5_gen
-from Task2_Fans6_7 import coord_D, point_DF
+from Task2_Fans6_7 import coord_D, point_DF, region7_sym, region7_gen
 from Task2_Fans8_9 import region9_gen, region9_sym, coord_H, pointHK
 from Task2_Lines import Line_init
 
@@ -92,13 +92,41 @@ def Main(M_0,phi_0,g,P_a,n):
         #x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a
         val_DF[i] = np.vstack(val_5[i][n][0:-3],point_DF(x_D, y_D, Val_1[6], val_5[i][n][-2],val_5[i][n][-1],val_5[i][n][2]+val_5[i][n][3]) )
 
+    #calculate region 7
+    #similar to 5
 
+    val_7 = np.zeros((n,n,6))
+    #first row is just DF
+    for i in range(n):
+        val_7[0][i] = val_DF[i]
+
+    for j in range(1,n):
+
+        for i in range(j,n):
+
+            if i==j:
+                #x_c, y_c, mu_c, phi_c, V_plus_c, x_D, y_D, phi_D,P_a,g, P_t_0
+                val_7[j][i] = np.array(region7_sym(val_7[j-1][i][0], val_7[j-1][i][1], val_7[j-1][i][3], val_7[j-1][i][2], val_7[j-1][i][4], x_D, y_D, Val_1[2], P_a, g, P_t_0))
+            else:
+                #x_a, y_a, x_d, y_d, V_min_a, V_plus_d, mu_a, g, phi_a, phi_d, mu_d
+                val_7[j][i] = np.array(region7_gen(val_7[j][i-1][0], val_7[j][i-1][1], val_7[j-1][i][0], val_7[j-1][i][1], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j][i-1][2], g, val_7[j][i-1][3], val_7[j-1][i][3], val_7[j-1][i][2]))
     
+    #calculate location of H
+    #Gamma_min_angle_2, x_F, y_F, y_H
+    x_H, y_H = coord_H(Val_2[6], val_7[0][n][4], val_7[0][n][5], 0)
+
+    #get values in HK
+    #take last column of 7, swap x and y with location from function
+    val_HK = np.zeros((n,6))
+    for i in range(n):
+        #x_H, y_H, mu_H, V_plus_H, phi_H, x_a, y_a, mu_a, phi_a, V_min_a, g
+        val_HK[i] = np.vstack(val_7[i][n][0:-3],pointHK(x_H, y_H, Val_2[3], Val_2[5], Val_2[2], val_7[i][n][0], val_7[i][n][1], val_7[i][n][2], val_7[i][n][3], val_7[i][n][4], g) )
+    
+    #calculate region 9
+
+     
 
 
-    #from endpoints 
-
-#
 
 if __name__ == "__main__" :
     Main(M_0,phi_0,g,P_a,n) 

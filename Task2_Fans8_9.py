@@ -28,23 +28,13 @@ def pointHK(x_H, y_H, mu_H, V_plus_H, phi_H, x_a, y_a, mu_a, phi_a, V_min_a, g):
     Gamma_min_angle_a = Gamma_min_angle(phi_a,mu_a)
     slope_a = math.tan(Gamma_min_angle_a)
 
-    #calculate values in a point p
-    nu_p = (V_min_a+V_plus_H)/2
-    phi_p = (V_min_a-V_plus_H)/2
-    #calculate M and mu in p
-    M_p = mach_number_nu(nu_p,g)
-    mu_p = math.asin(1/M_p)
-    #calculate V_min in p
-    V_min_p = V_min(phi_p,nu_p)
-    V_plus_p = V_plus(phi_p,nu_p)
-
     #get slope from D
     slope_H = math.tan((phi_H+mu_H+phi_a+mu_a)/2)
 
     #get location of P
     x_p = (y_a-y_H+slope_H*x_H-x_a*slope_a)/(slope_H-slope_a)
     y_p = slope_a*(x_p-x_a)+y_a
-    return x_p, y_p, mu_p, nu_p, M_p, phi_p, V_min_p, V_plus_p
+    return x_p, y_p
 
 #find points in region 9
 #c is a point above a on the same char.
@@ -56,7 +46,7 @@ def region9_sym (x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c):
     slope_ca = math.tan((-mu_a-mu_c+phi_c+phi_a)/2)
     x_a = ((y_a-y_c)/slope_ca+x_c)
     V_plus_a = V_plus(phi_a,nu_a)
-    return x_a, y_a, mu_a, nu_a, M_a, V_plus_a
+    return nu_a, M_a, 0, mu_a, x_a, y_a
     
 #calculate a point in 9, NOT on the symmetry line
 #d is above, a is below
@@ -73,4 +63,4 @@ def region9_gen (x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, m
     #get intersection point
     x_b = (slope_a*x_a-y_a-slope_d*x_d+y_d)/(slope_a-slope_d)
     y_b = slope_a*(x_b-x_a)+y_a
-    return x_b, y_b, mu_b, nu_b, M_b, phi_b, V_plus_b, V_min_b
+    return nu_b, M_b, phi_b, mu_b, x_b, y_b

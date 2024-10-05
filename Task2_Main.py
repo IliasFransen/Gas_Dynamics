@@ -89,14 +89,14 @@ def Main(M_0,phi_0,g,P_a,n):
    
     #calculate location of D
     #Gamma_plus_angle_1, x_C, y_C, y_A, x_A, phi_1
-    x_D, y_D = coord_D(Val_1[7], val_5[0][n][4], val_5[0][n][5], y_A, x_A, Val_1[2])
+    x_D, y_D = coord_D(Val_1[7], val_5[0][-1][4], val_5[0][-1][5], y_A, x_A, Val_1[2])
 
     #get values in DF
     #take last column of 5, swap x and y with location from function
     val_DF = np.zeros((n,6))
     for i in range(n):
         #x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a
-        val_DF[i] = np.vstack(val_5[i][n][0:-3],point_DF(x_D, y_D, Val_1[6], val_5[i][n][-2],val_5[i][n][-1],val_5[i][n][2]+val_5[i][n][3]) )
+        val_DF[i] = (np.hstack((val_5[i][-1][0:-2],point_DF(x_D, y_D, Val_1[6], val_5[i][-1][-2],val_5[i][-1][-1],val_5[i][-1][2]+val_5[i][-1][3])) ))
 
     #calculate region 7
     #similar to 5
@@ -119,14 +119,15 @@ def Main(M_0,phi_0,g,P_a,n):
     
     #calculate location of H
     #Gamma_min_angle_2, x_F, y_F, y_H
-    x_H, y_H = coord_H(Val_2[6], val_7[0][n][4], val_7[0][n][5], 0)
+    x_H, y_H = coord_H(Val_2[6], val_7[0][-1][4], val_7[0][-1][5], 0)
 
     #get values in HK
     #take last column of 7, swap x and y with location from function
     val_HK = np.zeros((n,6))
+    
     for i in range(n):
         #x_H, y_H, mu_H, V_plus_H, phi_H, x_a, y_a, mu_a, phi_a, V_min_a, g
-        val_HK[i] = np.vstack(val_7[i][n][0:-3],pointHK(x_H, y_H, Val_2[3], Val_2[5], Val_2[2], val_7[i][n][0], val_7[i][n][1], val_7[i][n][2], val_7[i][n][3], val_7[i][n][4], g) )
+        val_HK [i] = np.hstack((val_7[i][-1][0:-2],pointHK(x_H, y_H, Val_2[3], Val_2[5], Val_2[2], val_7[i][-1][0], val_7[i][-1][1], val_7[i][-1][2], val_7[i][-1][3], val_7[i][-1][4], g) ))
     
     #calculate region 9
     #similar to 5

@@ -42,7 +42,7 @@ def region7_sym (x_c, y_c, mu_c, phi_c, V_plus_c, x_D, y_D, phi_D,P_a,g, P_t_0 )
     slope_Da = math.tan((phi_a+phi_D)/2)
     x_a = (y_c-y_D+slope_Da*x_D-x_c*slope_ca)/(slope_Da-slope_ca)
     y_a = slope_ca*(x_a-x_c)+y_c
-    return x_a, y_a, mu_a, nu_a, M_a, V_min_a, phi_a
+    return nu_a, M_a, phi_a, mu_a, x_a, y_a
 
 #calculate a point in 7, NOT on the symmetry line
 #a is above, d is below
@@ -59,4 +59,4 @@ def region7_gen (x_a, y_a, x_d, y_d, V_min_a, V_plus_d, mu_a, g, phi_a, phi_d, m
     #get intersection point
     x_b = (slope_a*x_a-y_a-slope_d*x_d+y_d)/(slope_a-slope_d)
     y_b = slope_a*(x_b-x_a)+y_a
-    return x_b, y_b, mu_b, nu_b, M_b, phi_b, V_plus_b, V_min_b
+    return nu_b, M_b, phi_b, mu_b, x_b, y_b

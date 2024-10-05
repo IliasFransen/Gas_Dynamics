@@ -21,27 +21,27 @@ def mach_number_pres(P_t, P,g):
 
 #calculates the mach angle
 def mach_angle(M):
-    mu = np.asin(1/M)
+    mu = math.asin(1/M)
     return float(mu)
 
 #print(mach_angle(2)) CHECK
 
 #calculates prandtl-meyer angle
 def prandtl_meyer_angle(M,g):
-    nu = ((g+1)/(g-1))**0.5 * np.atan(math.sqrt((g-1)/(g+1)*(M**2-1)))-np.atan(np.sqrt(M**2-1))
+    nu = ((g+1)/(g-1))**0.5 * math.atan(math.sqrt((g-1)/(g+1)*(M**2-1)))-math.atan(np.sqrt(M**2-1))
     return float(nu)
 
 #print(prandtl_meyer_angle(2,1.4)) CHECK
 
 #define function for fsolve
 def func(M,nu,g):
-    return np.sqrt((g+1)/(g-1))*np.atan(np.sqrt((g-1)/(g+1)*(M**2-1)))-np.atan(np.sqrt(M**2-1)) - nu
+    return np.sqrt((g+1)/(g-1))*math.atan(np.sqrt((g-1)/(g+1)*(M**2-1)))-math.atan(np.sqrt(M**2-1)) - nu
 
 #calculates mach number from prandtl-meyer angle
 def mach_number_nu(nu,g):
     #numerically solve for M
     M = fsolve(func, 1.5, args=(nu,1.4))
-    return M
+    return float(M)
 
 #print(mach_number_nu(prandtl_meyer_angle(2,1.4),1.4)) CHECK
 

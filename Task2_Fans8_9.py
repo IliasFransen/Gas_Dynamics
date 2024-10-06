@@ -14,8 +14,9 @@ from Task2_Fans6_7 import coord_D, point_DF
 #follow Gamma-2 out of F
 def coord_H(Gamma_min_angle_2, x_F, y_F, y_H):
     slope_2 = math.tan(Gamma_min_angle_2)
-    x_H = (slope_2*(-x_F) - y_H + y_F)/(-slope_2)
+    x_H = x_F + (y_H-y_F)/slope_2
     return x_H, y_H
+
 
 #solve in region 9
 #exactly same as region 5

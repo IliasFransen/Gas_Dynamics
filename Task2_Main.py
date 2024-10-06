@@ -117,7 +117,7 @@ def Main(M_0,phi_0,g,P_a,n):
                 val_7[j][i] = np.array(region7_sym(val_7[j-1][i][4], val_7[j-1][i][5], val_7[j-1][i][3], val_7[j-1][i][2], val_7[j-1][i][0]-val_7[j-1][i][2], x_D, y_D, Val_1[2], P_a, g, P_t_0))
             else:
                 #x_a, y_a, x_d, y_d, V_min_a, V_plus_d, mu_a, g, phi_a, phi_d, mu_d
-                val_7[j][i] = np.array(region7_gen(val_7[j][i-1][4], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j-1][i][5], val_7[j][i-1][0]+val_7[j][i-1][2], val_7[j-1][i][0]-val_7[j-1][i][2], val_7[j][i-1][3], g, val_7[j][i-1][3], val_7[j-1][i][4], val_7[j-1][i][2]))
+                val_7[j][i] = np.array(region7_gen(val_7[j][i-1][4], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j-1][i][5], val_7[j][i-1][0]+val_7[j][i-1][2], val_7[j-1][i][0]-val_7[j-1][i][2], val_7[j][i-1][3], g, val_7[j][i-1][2], val_7[j-1][2][3], val_7[j-1][i][3]))
 
     
     #calculate location of H
@@ -128,10 +128,12 @@ def Main(M_0,phi_0,g,P_a,n):
     #take last column of 7, swap x and y with location from function
     val_HK = np.zeros((n,6))
     
-    for i in range(n):
+    val_HK [0] = np.hstack((val_7[0][-1][0:-2],x_H, y_H))
+
+    for i in range(n-1):
         #x_H, y_H, mu_H, V_plus_H, phi_H, x_a, y_a, mu_a, phi_a, V_min_a, g
-        val_HK [i] = np.hstack((val_7[i][-1][0:-2],pointHK(x_H, y_H, Val_2[3], Val_2[5], Val_2[2], val_7[i][-1][4], val_7[i][-1][5], val_7[i][-1][3], val_7[i][-1][2], val_7[i][-1][0]+val_7[i][-1][2], g) ))
-    
+        val_HK [i+1] = np.hstack((val_7[i+1][-1][0:-2],pointHK(x_H, y_H, Val_2[3], Val_2[5], Val_2[2], val_7[i+1][-1][4], val_7[i+1][-1][5], val_7[i+1][-1][3], val_7[i+1][-1][2], val_7[i+1][-1][0]+val_7[i+1][-1][2], g) ))
+
     print(val_HK)
 
     #calculate region 9

@@ -36,7 +36,6 @@ def region7_sym (x_c, y_c, mu_c, phi_c, V_plus_c, x_D, y_D, phi_D,P_a,g, P_t_0 )
     nu_a = prandtl_meyer_angle(M_a,g)
     mu_a = math.asin(1/M_a)
     phi_a = nu_a - V_plus_c
-    V_min_a = nu_a + phi_a
 
     slope_ca = math.tan((mu_a+mu_c+phi_c+phi_a)/2)
     slope_Da = math.tan((phi_a+phi_D)/2)

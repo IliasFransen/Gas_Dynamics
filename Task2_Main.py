@@ -134,7 +134,6 @@ def Main(M_0,phi_0,g,P_a,n):
         #x_H, y_H, mu_H, V_plus_H, phi_H, x_a, y_a, mu_a, phi_a, V_min_a, g
         val_HK [i+1] = np.hstack((val_7[i+1][-1][0:-2],pointHK(x_H, y_H, Val_2[3], Val_2[5], Val_2[2], val_7[i+1][-1][4], val_7[i+1][-1][5], val_7[i+1][-1][3], val_7[i+1][-1][2], val_7[i+1][-1][0]+val_7[i+1][-1][2], g) ))
 
-    print(val_HK)
 
     #calculate region 9
     #similar to 5
@@ -150,12 +149,12 @@ def Main(M_0,phi_0,g,P_a,n):
 
             if i==j:
                 #x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c
-                val_9[j][i] = np.array(region9_sym(val_9[j-1][i][0], val_9[j-1][i][1], 0, val_9[j-1][i][4], val_9[j-1][i][2], g, val_9[j-1][i][3], val_9[j-1][i][2]))
+                val_9[j][i] = np.array(region9_sym(val_9[j-1][i][4], val_9[j-1][i][5], 0, val_9[j-1][i][0] + val_9[j-1][i][2], 0, g, val_9[j-1][i][3], val_9[j-1][i][2]))
             else:
                 #x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, mu_d
-                val_9[j][i] = np.array(region9_gen(val_9[j][i-1][0], val_9[j][i-1][1], val_9[j-1][i][0], val_9[j-1][i][1], val_9[j][i-1][4], val_9[j-1][i][4], val_9[j][i-1][3], g, val_9[j][i-1][2], val_9[j-1][i][2], val_9[j-1][i][3]))
+                val_9[j][i] = np.array(region9_gen(val_9[j][i-1][4], val_9[j][i-1][5], val_9[j-1][i][4], val_9[j-1][i][5], val_9[j][i-1][0]-val_9[j][i-1][2], val_9[j-1][i][0] + val_9[j-1][i][2], val_9[j][i-1][3], g, val_9[j][i-1][2], val_9[j-1][i][2], val_9[j-1][i][3]))
      
-
+    print(val_9)
 
     #do something for region 11
 

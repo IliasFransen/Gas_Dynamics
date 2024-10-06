@@ -44,9 +44,6 @@ def Main(M_0,phi_0,g,P_a,n):
 
     Val_10 = region_10(phi_10, Val_3[4],g)
 
-    #CALCULATE DISCRETIZED LINES IN 4
-    angles_4 = Line_init(Val_0[6],Val_1[6],n)
-
     #START DOING NON UNIFORM REGIONS
 
     #calculate region 4
@@ -61,13 +58,15 @@ def Main(M_0,phi_0,g,P_a,n):
 
     #calculate location of B
     x_B, y_B = coord_B(y_A, Val_0[6])
-    
+
     #calculate points on BC with values
-    xy_bc = np.array([point_BC(x_B, y_B, y_A, x_A, angles_4[0], Val_0[7])])
+    xy_bc = np.array([point_BC(x_B, y_B, y_A, x_A, val_4[0][2]-val_4[0][3], Val_0[7])])
     for i in range(n-1):
-        xy_bc = np.vstack((xy_bc, point_BC(x_B, y_B, y_A, x_A, angles_4[i+1], Val_0[7])))
+        xy_bc = np.vstack((xy_bc, point_BC(x_B, y_B, y_A, x_A, val_4[i+1][2]-val_4[i+1][3], Val_0[-1])))
 
     val_BC = np.hstack((val_4, xy_bc))
+
+    print(val_BC, 'val_BC')
 
     #calculate points in 5
     val_5 = np.zeros((n,n,6))

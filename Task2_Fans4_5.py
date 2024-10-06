@@ -57,5 +57,3 @@ def region5_gen (x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, m
     y_b = slope_a*(x_b-x_a)+y_a
     return  nu_b, M_b, phi_b, mu_b, x_b, y_b
 
-#calculate point C
-#the coordinate of C can be found by picking a point the rightmost characteristic of fan 4 (has the same values as region 1)

@@ -29,6 +29,8 @@ def Main(M_0,phi_0,g,P_a,n):
     #CALCULATE ADDITIONAL PARAMETERS
     P_0 = 2*P_a
     P_t_0 = total_pressure(P_0, M_0,g)
+    phi_2 = phi_0
+    phi_10 = phi_0
 
     #CALCULATE UNIFORM REGIONS
     #val = nu, M, phi, mu, V_min, V_plus, Gamma_min_angle, Gamma_plus_angle
@@ -36,12 +38,11 @@ def Main(M_0,phi_0,g,P_a,n):
 
     Val_1 = region_1(P_a,Val_0[5],P_t_0,g)
 
-    Val_2 = region_2(Val_1[4],phi_2,g)
+    Val_2 = region_2(phi_2, Val_1[4],g)
 
     Val_3 = region_3(Val_2[5],P_a,P_t_0,g)
 
-    Val_10 = region_10(Val_3[4],phi_10,g)
-
+    Val_10 = region_10(phi_10, Val_3[4],g)
 
     #CALCULATE DISCRETIZED LINES IN 4
     angles_4 = Line_init(Val_0[6],Val_1[6],n)
@@ -154,3 +155,7 @@ def Main(M_0,phi_0,g,P_a,n):
 
 if __name__ == "__main__":
     Main(M_0,phi_0,g,P_a,n)
+
+    #add pressure per region
+    #plot
+    #define regions

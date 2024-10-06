@@ -60,13 +60,12 @@ def Main(M_0,phi_0,g,P_a,n):
     x_B, y_B = coord_B(y_A, Val_0[6])
 
     #calculate points on BC with values
-    xy_bc = np.array([point_BC(x_B, y_B, y_A, x_A, val_4[0][2]-val_4[0][3], Val_0[7])])
+    xy_bc = np.array([point_BC(x_B, y_B, y_A, x_A, val_4[0][2]-val_4[0][3], Val_0[-1])])
     for i in range(n-1):
         xy_bc = np.vstack((xy_bc, point_BC(x_B, y_B, y_A, x_A, val_4[i+1][2]-val_4[i+1][3], Val_0[-1])))
 
     val_BC = np.hstack((val_4, xy_bc))
 
-    print(val_BC, 'val_BC')
 
     #calculate points in 5
     val_5 = np.zeros((n,n,6))
@@ -86,10 +85,11 @@ def Main(M_0,phi_0,g,P_a,n):
                 #x_a, y_a, x_d, y_d, V_plus_a, V_min_d, mu_a, g, phi_a, phi_d, mu_d
                 val_5[j][i] = (region5_gen(val_5[j][i-1][4], val_5[j][i-1][5], val_5[j-1][i][4], val_5[j-1][i][5], val_5[j][i-1][0]-val_5[j][i-1][2], val_5[j-1][i][0]+val_5[j-1][i][2], val_5[j][i-1][3], g, val_5[j][i-1][2], val_5[j-1][i][2], val_5[j-1][i][3]))
             
-   
+    
     #calculate location of D
     #Gamma_plus_angle_1, x_C, y_C, y_A, x_A, phi_1
     x_D, y_D = coord_D(Val_1[7], val_5[0][-1][4], val_5[0][-1][5], y_A, x_A, Val_1[2])
+
 
     #get values in DF
     #take last column of 5, swap x and y with location from function
@@ -98,8 +98,10 @@ def Main(M_0,phi_0,g,P_a,n):
         #x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a
         val_DF[i] = (np.hstack((val_5[i][-1][0:-2],point_DF(x_D, y_D, Val_1[6], val_5[i][-1][-2],val_5[i][-1][-1],val_5[i][-1][2]+val_5[i][-1][3])) ))
 
+
     #calculate region 7
     #similar to 5
+
 
     val_7 = np.zeros((n,n,6))
     #first row is just DF
@@ -112,11 +114,13 @@ def Main(M_0,phi_0,g,P_a,n):
 
             if i==j:
                 #x_c, y_c, mu_c, phi_c, V_plus_c, x_D, y_D, phi_D,P_a,g, P_t_0
-                val_7[j][i] = np.array(region7_sym(val_7[j-1][i][0], val_7[j-1][i][1], val_7[j-1][i][3], val_7[j-1][i][2], val_7[j-1][i][4], x_D, y_D, Val_1[2], P_a, g, P_t_0))
+                val_7[j][i] = np.array(region7_sym(val_7[j-1][i][4], val_7[j-1][i][5], val_7[j-1][i][3], val_7[j-1][i][2], val_7[j-1][i][0]-val_7[j-1][i][2], x_D, y_D, Val_1[2], P_a, g, P_t_0))
             else:
                 #x_a, y_a, x_d, y_d, V_min_a, V_plus_d, mu_a, g, phi_a, phi_d, mu_d
-                val_7[j][i] = np.array(region7_gen(val_7[j][i-1][0], val_7[j][i-1][1], val_7[j-1][i][0], val_7[j-1][i][1], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j][i-1][2], g, val_7[j][i-1][3], val_7[j-1][i][3], val_7[j-1][i][2]))
-    
+                val_7[j][i] = np.array(region7_gen(val_7[j][i-1][4], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j-1][i][5], val_7[j][i-1][0]+val_7[j][i-1][2], val_7[j-1][i][0]-val_7[j-1][i][2], val_7[j][i-1][3], g, val_7[j][i-1][3], val_7[j-1][i][4], val_7[j-1][i][2]))
+
+    print(val_7, 'val_7')
+
     #calculate location of H
     #Gamma_min_angle_2, x_F, y_F, y_H
     x_H, y_H = coord_H(Val_2[6], val_7[0][-1][4], val_7[0][-1][5], 0)

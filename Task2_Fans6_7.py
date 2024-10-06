@@ -1,11 +1,7 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import math
-from scipy.optimize import fsolve
 
-from Task2_Functions import total_pressure, mach_number_pres, mach_angle, prandtl_meyer_angle, func, mach_number_nu, V_plus, V_min, Gamma_plus_angle, Gamma_min_angle
-from Task2_Regions import region_0, region_1, region_2, region_3
-from Task2_Fans4_5 import coord_B, region4, point_BC, region5_sym, region5_gen
+from Task2_Functions import mach_number_pres, prandtl_meyer_angle, mach_number_nu, V_plus, V_min
+
 
 
 

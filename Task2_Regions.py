@@ -1,9 +1,5 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-from scipy.optimize import fsolve
 
-from Task2_Functions import total_pressure, mach_number_pres, mach_angle, prandtl_meyer_angle, func, mach_number_nu, V_plus, V_min, Gamma_plus_angle, Gamma_min_angle
+from Task2_Functions import mach_number_pres, mach_angle, prandtl_meyer_angle, mach_number_nu, V_plus, V_min, Gamma_plus_angle, Gamma_min_angle
 
 #################################################CALCULATE UNIFORM REGIONS#################################################
 
@@ -60,16 +56,3 @@ def region_3(V_plus_2,P_a,P_t_0,g):
 
 #print(region_3(0.8592,101325,1585624,1.4)) CHECK
 
-#calculate region 10
-def region_10 (phi_10, V_min_3,g):
-    nu_10 = V_min_3 + phi_10
-    M_10 = mach_number_nu(nu_10,g)
-    V_plus_10 = V_plus(phi_10,nu_10)
-    V_min_10 = V_min(phi_10,nu_10)
-    Gamma_plus_angle_10 = Gamma_plus_angle(phi_10,mach_angle(M_10))
-    Gamma_min_angle_10 = Gamma_min_angle(phi_10,mach_angle(M_10))
-    mu_10 = mach_angle(M_10)
-    phi_10
-    return nu_10, M_10, phi_10, mu_10, V_min_10, V_plus_10, Gamma_plus_angle_10, Gamma_min_angle_10
-
-#print(region_10(0,0.0.5,1.4)) CHECK

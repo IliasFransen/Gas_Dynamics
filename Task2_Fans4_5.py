@@ -1,10 +1,7 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import math
-from scipy.optimize import fsolve, root
 
-from Task2_Functions import total_pressure, mach_number_pres, mach_angle, prandtl_meyer_angle, func, mach_number_nu, V_plus, V_min, Gamma_plus_angle, Gamma_min_angle
-from Task2_Regions import region_0, region_1, region_2, region_3
+from Task2_Functions import mach_number_nu
+
 
     
 #calculate any point in 4

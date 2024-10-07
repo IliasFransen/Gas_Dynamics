@@ -22,9 +22,11 @@ y_A = 1      #nozzle height (m)
 x_A = 0      #nozzle end (m)
 
 #number of lines in fans (including edges)
-n=4
+n=6
 
 def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
+
+
 
     #plot characteristics
     for i in range(n):
@@ -88,10 +90,11 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
         #get 5 x-points again
 
         x_8 = np.linspace(val_7[i][-1][4], val_9[0][i][4], 5+1, endpoint = False)[1:]
-        
+
         #get slope of 8
 
-        gamma_min_slope_8 = math.tan(val_7[i][-1][2]+val_7[i][-1][3])
+        gamma_min_slope_8 = math.tan(val_7[i][-1][2]-val_7[i][-1][3])
+        
 
         y_8 = gamma_min_slope_8*(x_8-val_7[i][-1][4])+val_7[i][-1][5]
 
@@ -114,12 +117,16 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
             x_9 = np.append(x_9, val_9[i][j][4])
             y_9 = np.append(y_9, val_9[i][j][5])
         
+        #create one long array for x and y
 
+        x = np.concatenate((x_4, x_5, x_6, x_7, x_8, x_9))
+        y = np.concatenate((y_4, y_5, y_6, y_7, y_8, y_9))
+
+        plt.plot(x, y, color = 'black')
 
         
 
-
-
+    
 
 
 
@@ -127,6 +134,10 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
 def Main():
     Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
     Lines(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A)
+    
+    ax = plt.gca()
+    ax.set_aspect('equal', adjustable='box')
+    plt.show()
 
 
 if __name__ == "__main__":

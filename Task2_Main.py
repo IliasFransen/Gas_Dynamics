@@ -24,8 +24,9 @@ y_A = 1      #nozzle height (m)
 x_A = 0      #nozzle end (m)
 
 #number of lines in fans (including edges)
-lines = False
-n=6
+lines = True
+n=20
+
 
 def Reg_0_color(m, Val_0, val_5, x_A, y_A):
     xi = np.linspace(x_A, val_5[0][0][4], m)
@@ -35,27 +36,45 @@ def Reg_0_color(m, Val_0, val_5, x_A, y_A):
     plt.contourf(xi, yi, zi)
     
 
+def Reg_1_color(m, Val_1, val_5, val_7, x_A, y_A):
+    xi = np.linspace(x_A, val_7[0][0][4], m)
+    yi = np.linspace(val_5[0][-1][5], val_7[0][0][5], m)
+    zi = griddata(([x_A,val_5[0][-1][4], val_7[0][0][4]], [y_A,val_5[0][-1][5], val_7[0][0][5]]), [Val_1[1], Val_1[1], Val_1[1]], (xi[None, :], yi[:, None]), method='cubic')
 
-def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
+    plt.contourf(xi, yi, zi)
+
+def Reg_2_color(m, Val_2, val_5, val_7, val_9, x_A, y_A):
+    xi = np.linspace(val_5[-1][-1][4], val_9[0][0][4], m)
+    yi = np.linspace(0, val_7[0][-1][5], m)
+    zi = griddata(([val_5[-1][-1][4], val_7[0][-1][4], val_9[0][0][4]], [val_5[-1][-1][5], val_7[0][-1][5],val_9[0][0][5]]), [Val_2[1], Val_2[1], Val_2[1]], (xi[None, :], yi[:, None]), method='cubic')
+
+    plt.contourf(xi, yi, zi)
+
+
+def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A):
 
     m = 100
     
     Reg_0_color(m, Val_0, val_5, x_A, y_A)
+    Reg_1_color(m, Val_1, val_5, val_7, x_A, y_A)
+    Reg_2_color(m, Val_2, val_5, val_7, val_9, x_A, y_A)
 
 
+    if lines:
+        Lines(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A)
+
+    ax = plt.gca()
+    ax.set_aspect('equal', adjustable='box')
+    plt.show()
 
         
 
 def Main():
     Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
-    if lines:
-        Lines(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A)
+    
+    colors(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A)
 
-    colors(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9)
-
-    ax = plt.gca()
-    ax.set_aspect('equal', adjustable='box')
-    plt.show()
+    
 
 
 if __name__ == "__main__":

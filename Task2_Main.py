@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 from scipy.optimize import fsolve
+from scipy.interpolate import griddata
+import seaborn as sns
 
 from Task2_Functions import total_pressure, mach_number_pres, mach_angle, prandtl_meyer_angle, func, mach_number_nu, V_plus, V_min, Gamma_plus_angle, Gamma_min_angle
 from Task2_Regions import region_0, region_1, region_2, region_3
@@ -30,7 +32,7 @@ def colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
     #region 1
     #create x and y array for region 1
     #always take 10 points in y uniform regions
-    m = 10
+    m = 100
     y_range = np.linspace(x_A, y_A, m, endpoint = False)
     #create points between characteristic lines and inlet
     x_1 = np.array([])
@@ -43,7 +45,7 @@ def colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
     #get slope of region 4's first char
     gamma_min_slope_4 = math.tan(val_4[0][2]-val_4[0][3])
     for i in range(m):
-        x_temp = np.linspace(x_A, (y_range[0]-y_A)/gamma_min_slope_4+x_A, m-i, endpoint = False)
+        x_temp = np.linspace(x_A, (y_range[i]-y_A)/math.tan(gamma_min_slope_4)+x_A, m-i, endpoint = True)
         y_temp = np.ones(m-i)*y_range[i]
         nu_temp = np.ones(m-i)*Val_1[0]
         M_temp = np.ones(m-i)*Val_1[1]
@@ -57,13 +59,21 @@ def colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
         phi_1 = np.append(phi_1, phi_temp)
         mu_1 = np.append(mu_1, mu_temp)
 
-
+        
     
     #create array with values of region 1
     Reg_1 = np.vstack((nu_1, M_1, phi_1, mu_1, x_1, y_1)).T
+
+
+    # Contour plot
+    plt.figure(figsize=(10, 5))
+    xi = np.linspace(min(Reg_1.T[4]), max(Reg_1.T[4]), 100)
+    yi = np.linspace(min(Reg_1.T[5]), max(Reg_1.T[5]), 100)
+    zi = griddata((Reg_1.T[4], Reg_1.T[5]), Reg_1.T[1], (xi[None, :], yi[:, None]), method='cubic')
+
+    plt.contourf(xi, yi, zi, levels=14, cmap='viridis')
+
     
-    plt.contour(Reg_1.T[-2], Reg_1.T[:][-1], Reg_1.T[1])
-        
 
 
 

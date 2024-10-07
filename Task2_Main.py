@@ -57,6 +57,17 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
             x_5 = np.append(x_5, val_5[i][j][4])
             y_5 = np.append(y_5, val_5[i][j][5])
                 
+        #region 6
+
+        #get 5 x-points again
+        x_6 = np.linspace(val_5[i][-1][4], val_7[0][i][4], 5+1, endpoint = False)[1:]
+
+        #get slope of 6
+
+        gamma_min_slope_6 = math.tan(val_5[i][-1][2]+val_5[i][-1][3])
+
+        y_6 = gamma_min_slope_6*(x_6-val_5[i][-1][4])+val_5[i][-1][5]
+
 
         
 

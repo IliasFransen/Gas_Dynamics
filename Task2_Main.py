@@ -27,75 +27,31 @@ x_A = 0      #nozzle end (m)
 lines = False
 n=6
 
-def Reg_1_color(m, Val_1, val_4, x_A, y_A):
+def Reg_0_color(m, Val_0, val_5, x_A, y_A):
+    xi = np.linspace(x_A, val_5[0][0][4], m)
+    yi = np.linspace(0, y_A, m)
+    zi = griddata(([x_A,0,val_5[0][0][4]], [y_A,0,val_5[0][0][5]]), [Val_0[1], Val_0[1], Val_0[1]], (xi[None, :], yi[:, None]), method='cubic')
 
-    y_range = np.linspace(x_A, y_A, m, endpoint = False)
-    #create points between characteristic lines and inlet
-    x_1 = np.array([])
-    y_1 = np.array([])
-    nu_1 = np.array([])
-    M_1 = np.array([])
-    phi_1 = np.array([])
-    mu_1 = np.array([])
-
-    #get slope of region 4's first char
-    gamma_min_slope_4 = math.tan(val_4[0][2]-val_4[0][3])
-    for i in range(m):
-        x_temp = np.linspace(x_A, (y_range[i]-y_A)/math.tan(gamma_min_slope_4)+x_A, m-i, endpoint = True)
-        y_temp = np.ones(m-i)*y_range[i]
-        nu_temp = np.ones(m-i)*Val_1[0]
-        M_temp = np.ones(m-i)*Val_1[1]
-        phi_temp = np.ones(m-i)*Val_1[2]
-        mu_temp = np.ones(m-i)*Val_1[3]
-
-        x_1 = np.append(x_1, x_temp)
-        y_1 = np.append(y_1, y_temp)
-        nu_1 = np.append(nu_1, nu_temp)
-        M_1 = np.append(M_1, M_temp)
-        phi_1 = np.append(phi_1, phi_temp)
-        mu_1 = np.append(mu_1, mu_temp)
-
-        
+    plt.contourf(xi, yi, zi)
     
-    #create array with values of region 1
-    return np.vstack((nu_1, M_1, phi_1, mu_1, x_1, y_1)).T
 
 
-def colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
+def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
 
-    #region 1
-    #create x and y array for region 1
-    #always take 10 points in y uniform regions
     m = 100
     
-    Reg_1 = Reg_1_color(m)
-
-
-    # Contour plot
-    plt.figure(figsize=(10, 5))
-    xi = np.linspace(min(Reg_1.T[4]), max(Reg_1.T[4]), 100)
-    yi = np.linspace(min(Reg_1.T[5]), max(Reg_1.T[5]), 100)
-    zi = griddata((Reg_1.T[4], Reg_1.T[5]), Reg_1.T[1], (xi[None, :], yi[:, None]), method='cubic')
-
-    plt.contourf(xi, yi, zi, levels=14, cmap='viridis')
-
-    
+    Reg_0_color(m, Val_0, val_5, x_A, y_A)
 
 
 
         
-
-    
-
-
-
 
 def Main():
     Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
     if lines:
         Lines(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A)
 
-    colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9)
+    colors(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9)
 
     ax = plt.gca()
     ax.set_aspect('equal', adjustable='box')

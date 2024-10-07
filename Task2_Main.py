@@ -22,8 +22,48 @@ y_A = 1      #nozzle height (m)
 x_A = 0      #nozzle end (m)
 
 #number of lines in fans (including edges)
-lines = True
+lines = False
 n=6
+
+def colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
+
+    #region 1
+    #create x and y array for region 1
+    #always take 10 points in y uniform regions
+    m = 10
+    y_range = np.linspace(x_A, y_A, m, endpoint = False)
+    #create points between characteristic lines and inlet
+    x_1 = np.array([])
+    y_1 = np.array([])
+    nu_1 = np.array([])
+    M_1 = np.array([])
+    phi_1 = np.array([])
+    mu_1 = np.array([])
+
+    #get slope of region 4's first char
+    gamma_min_slope_4 = math.tan(val_4[0][2]-val_4[0][3])
+    for i in range(m):
+        x_temp = np.linspace(x_A, (y_range[0]-y_A)/gamma_min_slope_4+x_A, m-i, endpoint = False)
+        y_temp = np.ones(m-i)*y_range[i]
+        nu_temp = np.ones(m-i)*Val_1[0]
+        M_temp = np.ones(m-i)*Val_1[1]
+        phi_temp = np.ones(m-i)*Val_1[2]
+        mu_temp = np.ones(m-i)*Val_1[3]
+
+        x_1 = np.append(x_1, x_temp)
+        y_1 = np.append(y_1, y_temp)
+        nu_1 = np.append(nu_1, nu_temp)
+        M_1 = np.append(M_1, M_temp)
+        phi_1 = np.append(phi_1, phi_temp)
+        mu_1 = np.append(mu_1, mu_temp)
+
+
+    
+    #create array with values of region 1
+    Reg_1 = np.vstack((nu_1, M_1, phi_1, mu_1, x_1, y_1)).T
+    
+    plt.contour(Reg_1.T[-2], Reg_1.T[:][-1], Reg_1.T[1])
+        
 
 
 
@@ -38,6 +78,8 @@ def Main():
     Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
     if lines:
         Lines(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A)
+
+    colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9)
 
     ax = plt.gca()
     ax.set_aspect('equal', adjustable='box')

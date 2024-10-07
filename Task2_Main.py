@@ -27,12 +27,8 @@ x_A = 0      #nozzle end (m)
 lines = False
 n=6
 
-def colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
+def Reg_1_color(m, Val_1, val_4, x_A, y_A):
 
-    #region 1
-    #create x and y array for region 1
-    #always take 10 points in y uniform regions
-    m = 100
     y_range = np.linspace(x_A, y_A, m, endpoint = False)
     #create points between characteristic lines and inlet
     x_1 = np.array([])
@@ -62,7 +58,17 @@ def colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
         
     
     #create array with values of region 1
-    Reg_1 = np.vstack((nu_1, M_1, phi_1, mu_1, x_1, y_1)).T
+    return np.vstack((nu_1, M_1, phi_1, mu_1, x_1, y_1)).T
+
+
+def colors(Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9):
+
+    #region 1
+    #create x and y array for region 1
+    #always take 10 points in y uniform regions
+    m = 100
+    
+    Reg_1 = Reg_1_color(m)
 
 
     # Contour plot

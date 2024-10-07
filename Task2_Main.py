@@ -83,8 +83,36 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
             x_7 = np.append(x_7, val_7[i][j][4])
             y_7 = np.append(y_7, val_7[i][j][5])
 
-        
+        #region 8
 
+        #get 5 x-points again
+
+        x_8 = np.linspace(val_7[i][-1][4], val_9[0][i][4], 5+1, endpoint = False)[1:]
+        
+        #get slope of 8
+
+        gamma_min_slope_8 = math.tan(val_7[i][-1][2]+val_7[i][-1][3])
+
+        y_8 = gamma_min_slope_8*(x_8-val_7[i][-1][4])+val_7[i][-1][5]
+
+        #region 9
+
+        #isolate x and y out of 9 array
+
+        x_9 = np.array([])
+        y_9 = np.array([])
+
+        x_9 = np.array([])
+        y_9 = np.array([])
+
+        for j in range(i):
+            x_9 = np.append(x_9, val_9[j][i][4])
+            y_9 = np.append(y_9, val_9[j][i][5])
+
+
+        for j in range(i,n):
+            x_9 = np.append(x_9, val_9[i][j][4])
+            y_9 = np.append(y_9, val_9[i][j][5])
         
 
 

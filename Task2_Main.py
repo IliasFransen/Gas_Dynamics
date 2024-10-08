@@ -29,7 +29,7 @@ x_A = 0      #nozzle end (m)
 plot = True
 lines = True
 colors = False
-n=50
+n=7
 
 
 

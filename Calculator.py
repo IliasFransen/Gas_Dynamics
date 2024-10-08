@@ -83,7 +83,7 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
 
     #calculate region 7
     #similar to 5
-
+    #LOOPS WRONG WAY AAAAAAAAAAAAAAA
 
     val_7 = np.zeros((n,n,6))
     #first row is just DF
@@ -102,6 +102,8 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
                 val_7[j][i] = np.array(region7_gen(val_7[j][i-1][4], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j-1][i][5], val_7[j][i-1][0]+val_7[j][i-1][2], val_7[j-1][i][0]-val_7[j-1][i][2], val_7[j][i-1][3], g, val_7[j][i-1][2], val_7[j-1][2][3], val_7[j-1][i][3]))
 
     
+    print(val_7)
+
     #calculate location of H
     #Gamma_min_angle_2, x_F, y_F, y_H
     x_H, y_H = coord_H(Val_2[6], val_7[0][-1][4], val_7[0][-1][5], 0)

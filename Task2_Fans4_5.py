@@ -28,6 +28,8 @@ def point_BC (x_B, y_B, y_A, x_A, delta_p, Gamma_plus_angle_0):
     y_P = math.tan(delta_p)*(x_P-x_A)+y_A
     return x_P, y_P
 
+#does move with nonlinear shit
+
 #print(point_BC(1,0,1,0,0.5,0.5)) CHECK
 
 #calculate a point in 5, on the symmetry line

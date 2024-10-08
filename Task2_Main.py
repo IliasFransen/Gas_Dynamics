@@ -25,7 +25,8 @@ x_A = 0      #nozzle end (m)
 
 #number of lines in fans (including edges)
 lines = True
-n=20
+plot = True
+n=5
 
 
 def Reg_0_color(m, Val_0, val_5, x_A, y_A):
@@ -50,14 +51,81 @@ def Reg_2_color(m, Val_2, val_5, val_7, val_9, x_A, y_A):
 
     plt.contourf(xi, yi, zi)
 
+def Reg_4_colors (x_A, y_A, val_4, val_5, n):
+    
+    #take 100 points along each line
+    m = 100
 
-def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A):
+
+    Val_4 = np.zeros((m*n,6))
+
+    for i in range(n):
+        x_4 = np.linspace(x_A, val_5[0][i][4], m+2)[1:-1]
+        slope = math.tan(val_4[i][2]-val_4[i][3])
+        for j in range(m):
+            y_4 = slope*(x_4[j]-x_A) + y_A
+            Val_4[i*m+j] = np.append(val_4[i], [x_4[j], y_4])
+
+    #interpolate the values for plotting
+    xi = np.linspace(min(Val_4[:,4]), max(Val_4[:,4]), 100)
+    yi = np.linspace(min(Val_4[:,5]), max(Val_4[:,5]), 100)
+    zi = griddata((Val_4[:,4], Val_4[:,5]), Val_4[:,1], (xi[None, :], yi[:, None]), method='cubic')
+    
+    plt.contourf(xi, yi, zi)
+
+
+def Reg_5_colors (val_5,n):
+
+    x_5 = np.array([])
+    y_5 = np.array([])
+    M_5 = np.array([])
+
+    for i in range(n):
+        
+        for j in range(i,n):
+            x_5 = np.append(x_5, val_5[i][j][4])
+            y_5 = np.append(y_5, val_5[i][j][5])
+            M_5 = np.append(M_5, val_5[i][j][1])
+
+    xi = np.linspace(min(x_5), max(x_5), 100)
+    yi = np.linspace(min(y_5), max(y_5), 100)
+    zi = griddata((x_5, y_5), M_5, (xi[None, :], yi[:, None]), method='cubic')
+
+    plt.contourf(xi, yi, zi)
+
+def Reg_6_colors (val_5, val_7, n):
+    
+    #take 100 points along each line
+    m = 100
+
+    Val_6 = np.zeros((m*n,6))
+
+    for i in range(n):
+        x_6 = np.linspace(val_5[i][-1][4], val_7[0][i][4], m+2)[1:-1]
+        slope = math.tan(val_5[i][-1][2]+val_5[i][-1][3])
+        for j in range(m):
+            y_6 = slope*(x_6[j]-val_5[i][-1][4]) + val_5[i][-1][5]
+            Val_6[i*m+j] = np.append(val_5[i][-1][:4], [x_6[j], y_6])
+
+    #interpolate the values for plotting
+    xi = np.linspace(min(Val_6[:,4]), max(Val_6[:,4]), 100)
+    yi = np.linspace(min(Val_6[:,5]), max(Val_6[:,5]), 100)
+    zi = griddata((Val_6[:,4], Val_6[:,5]), Val_6[:,1], (xi[None, :], yi[:, None]), method='cubic')
+    
+    plt.contourf(xi, yi, zi)
+        
+
+
+def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n):
 
     m = 100
     
     Reg_0_color(m, Val_0, val_5, x_A, y_A)
     Reg_1_color(m, Val_1, val_5, val_7, x_A, y_A)
     Reg_2_color(m, Val_2, val_5, val_7, val_9, x_A, y_A)
+    Reg_4_colors(x_A, y_A, val_4, val_5, n)
+    Reg_5_colors(val_5,n)
+    Reg_6_colors(val_5, val_7, n)
 
 
     if lines:
@@ -65,14 +133,14 @@ def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A):
 
     ax = plt.gca()
     ax.set_aspect('equal', adjustable='box')
-    plt.show()
-
+    if plot:
+        plt.show()
         
 
 def Main():
     Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
     
-    colors(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A)
+    colors(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n)
 
     
 

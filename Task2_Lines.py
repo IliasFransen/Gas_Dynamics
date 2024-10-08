@@ -5,8 +5,6 @@ import math
 
 def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
 
-
-
     #plot characteristics
     for i in range(n):
 
@@ -29,9 +27,7 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
         x_5 = np.array([])
         y_5 = np.array([])
 
-        for j in range(i):
-            x_5 = np.append(x_5, val_5[j][i][4])
-            y_5 = np.append(y_5, val_5[j][i][5])
+        
 
 
         for j in range(i,n):

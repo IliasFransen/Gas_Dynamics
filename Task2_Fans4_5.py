@@ -25,11 +25,23 @@ def coord_B(y_A, Gamma_min_angle_0):
 #B is just the previous point, moves along with the characteristics
 def point_BC (x_B, y_B, y_A, x_A, delta_p, Gamma_plus_angle_0):
 
-    
-
     x_P = (y_B - y_A + math.tan(delta_p)*x_A-math.tan(Gamma_plus_angle_0)*x_B)/(-math.tan(Gamma_plus_angle_0)+math.tan(delta_p))
     y_P = math.tan(delta_p)*(x_P-x_A)+y_A
     return x_P, y_P
+
+def point_BC_new (x_B, y_B, nu_B, M_B, phi_B, mu_B, y_A, x_A, val_4, n, i, g):
+    nu_p = (val_4[i][0]+val_4[i][2] + nu_B-phi_B)/2
+    phi_p = (val_4[i][0]+val_4[i][2] - (nu_B - phi_B))/2
+    M_p = mach_number_nu(nu_p,g)
+    mu_p = math.asin(1/M_p)
+    #get slopes of a and d
+    slope_B = math.tan((mu_B+mu_p+phi_B+phi_p)/2)
+    slope_4 = math.tan((-mu_p-val_4[i][3]+phi_p+val_4[i][2])/2)
+    #get intersection point
+    x_p = (slope_B*x_B-y_B-slope_4*x_A+y_A)/(slope_B-slope_4)
+    y_p = slope_B*(x_p-x_B)+y_B
+    return  nu_p, M_p, phi_p, mu_p, x_p, y_p
+    
 
 #does move with nonlinear shit
 

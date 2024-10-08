@@ -164,3 +164,6 @@ def Reg_9_colors (val_9,n):
         zi = griddata((x_9, y_9), M_9, (xi[None, :], yi[:, None]), method='cubic')
     
         plt.contourf(xi, yi, zi)
+
+
+

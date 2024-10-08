@@ -12,7 +12,7 @@ from Task2_Fans6_7 import coord_D, point_DF, region7_sym, region7_gen
 from Task2_Fans8_9 import region9_gen, region9_sym, coord_H, pointHK
 from Task2_Lines import Lines
 from Calculator import Calculator
-from Task2_Colors import colors, Reg_0_color, Reg_1_color, Reg_2_color, Reg_3_color, Reg_4_colors, Reg_5_colors, Reg_6_colors, Reg_7_colors, Reg_8_colors, Reg_9_colors
+from Task2_Colors import Reg_0_color, Reg_1_color, Reg_2_color, Reg_3_color, Reg_4_colors, Reg_5_colors, Reg_6_colors, Reg_7_colors, Reg_8_colors, Reg_9_colors
 
 #define variables
 M_0 = 2      #inlet mach number
@@ -25,9 +25,11 @@ y_A = 1      #nozzle height (m)
 x_A = 0      #nozzle end (m)
 
 #number of lines in fans (including edges)
-lines = True
+
 plot = True
-n=5
+lines = True
+colors = False
+n=50
 
 
 
@@ -61,6 +63,7 @@ def Main():
     Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
     
     colors(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n)
+    
 
     
 if __name__ == "__main__":

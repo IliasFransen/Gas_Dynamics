@@ -90,16 +90,16 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
     for i in range(n):
         val_7[0][i] = val_DF[i]
 
-    for j in range(1,n):
+    for i in range(1,n):
 
-        for i in range(j,n):
+        for j in range(1,i+1):
 
             if i==j:
                 #x_c, y_c, mu_c, phi_c, V_plus_c, x_D, y_D, phi_D,P_a,g, P_t_0
-                val_7[j][i] = np.array(region7_sym(val_7[j-1][i][4], val_7[j-1][i][5], val_7[j-1][i][3], val_7[j-1][i][2], val_7[j-1][i][0]-val_7[j-1][i][2], x_D, y_D, Val_1[2], P_a, g, P_t_0))
+                val_7[j][i] = np.array(region7_sym(val_7[j-1][i][4], val_7[j-1][i][5], val_7[j-1][i][3], val_7[j-1][i][2], val_7[j-1][i][0]-val_7[j-1][i][2], val_7[j-1][i-1][4], val_7[j-1][i-1][5], val_7[j-1][i-1][2], P_a, g, P_t_0))
             else:
                 #x_a, y_a, x_d, y_d, V_min_a, V_plus_d, mu_a, g, phi_a, phi_d, mu_d
-                val_7[j][i] = np.array(region7_gen(val_7[j][i-1][4], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j-1][i][5], val_7[j][i-1][0]+val_7[j][i-1][2], val_7[j-1][i][0]-val_7[j-1][i][2], val_7[j][i-1][3], g, val_7[j][i-1][2], val_7[j-1][2][3], val_7[j-1][i][3]))
+                val_7[j][i] = np.array(region7_gen(val_7[j][i-1][4], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j-1][i][5], val_7[j][i-1][0]+val_7[j][i-1][2], val_7[j-1][i][0]-val_7[j-1][i][2], val_7[j][i-1][3], g, val_7[j][i-1][2], val_7[j-1][2][2], val_7[j-1][i][3]))
 
     
     print(val_7)

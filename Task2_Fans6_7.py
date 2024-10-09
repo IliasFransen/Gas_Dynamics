@@ -51,8 +51,8 @@ def region7_gen (x_a, y_a, x_d, y_d, V_min_a, V_plus_d, mu_a, g, phi_a, phi_d, m
     M_b = mach_number_nu(nu_b,g)
     mu_b = math.asin(1/M_b)
     #get slopes of a and d
-    slope_d = math.tan((mu_a+mu_b+phi_a+phi_b)/2)
-    slope_a = math.tan((-mu_b-mu_d+phi_b+phi_d)/2)
+    slope_a = math.tan((-mu_a-mu_b+phi_a+phi_b)/2)
+    slope_d = math.tan((mu_b+mu_d+phi_b+phi_d)/2)
     #get intersection point
     x_b = (slope_a*x_a-y_a-slope_d*x_d+y_d)/(slope_a-slope_d)
     y_b = slope_a*(x_b-x_a)+y_a

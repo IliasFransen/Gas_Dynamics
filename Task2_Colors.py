@@ -135,7 +135,7 @@ def Reg_8_colors (val_7, val_9, n):
 
     for i in range(n):
         x_8 = np.linspace(val_7[i][-1][4], val_9[0][i][4], m+2)[1:-1]
-        slope = math.tan(val_7[i][-1][2]-val_7[i][-1][3])
+        slope = math.tan((val_7[i][-1][2]-val_7[i][-1][3] + val_9[0][i][2] - val_9[0][i][3])/2)
         for j in range(m):
             y_8 = slope*(x_8[j]-val_7[i][-1][4]) + val_7[i][-1][5]
             Val_8[i*m+j] = np.append(val_7[i][-1][:4], [x_8[j], y_8])    

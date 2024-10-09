@@ -19,7 +19,7 @@ def coord_B(y_A, Gamma_min_angle_0):
     y_B = 0
     return x_B, y_B
 
-#print(coord_B(1,2,0,1.4,101325,-0.5)) CHECK
+
 
 #calculate a point on BC
 #B is just the previous point, moves along with the characteristics

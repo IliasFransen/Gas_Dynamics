@@ -57,7 +57,6 @@ def region9_sym (x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c):
     mu_a = math.asin(1/M_a)
     slope_ca = math.tan((-mu_a-mu_c+phi_c+phi_a)/2)
     x_a = ((y_a-y_c)/slope_ca+x_c)
-    V_plus_a = V_plus(phi_a,nu_a)
     return nu_a, M_a, 0, mu_a, x_a, y_a
     
 #calculate a point in 9, NOT on the symmetry line

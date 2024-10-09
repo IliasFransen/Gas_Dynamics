@@ -38,7 +38,7 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
 
         #get slope of 6
 
-        gamma_min_slope_6 = math.tan(val_5[i][-1][2]+val_5[i][-1][3])
+        gamma_min_slope_6 = math.tan((val_5[i][-1][2]+val_5[i][-1][3]+val_7[0][i][2]+val_7[0][i][3])/2)
 
         y_6 = gamma_min_slope_6*(x_6-val_5[i][-1][4])+val_5[i][-1][5]
 

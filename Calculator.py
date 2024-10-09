@@ -6,7 +6,7 @@ from scipy.optimize import fsolve
 from Task2_Functions import total_pressure
 from Task2_Regions import region_0, region_1, region_2, region_3
 from Task2_Fans4_5 import coord_B, region4, point_BC, region5_sym, region5_gen, point_BC_new
-from Task2_Fans6_7 import coord_D, point_DF, region7_sym, region7_gen
+from Task2_Fans6_7 import coord_D, point_DF, region7_sym, region7_gen, point_DF_new
 from Task2_Fans8_9 import region9_gen, region9_sym, coord_H, pointHK
 
 
@@ -81,6 +81,15 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
     for i in range(n):
         #x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a
         val_DF[i] = (np.hstack((val_5[i][-1][0:-2],point_DF(x_D, y_D, Val_1[6], val_5[i][-1][-2],val_5[i][-1][-1],val_5[i][-1][2]+val_5[i][-1][3])) ))
+
+    val_DF = np.array(point_DF_new(x_D, y_D, Val_1[0], Val_1[1], Val_1[2], Val_1[3], val_5, n, 0, g))
+    val_DF = np.vstack((val_DF,np.array(point_DF_new(x_D, y_D, Val_1[0], Val_1[1], Val_1[2], Val_1[3], val_5, n, 0, g))))
+    for i in range(n-1):
+        val_DF = np.vstack((val_DF, point_DF_new(val_DF[-1][4], val_DF[-1][5], val_DF[-1][0], val_DF[-1][1], val_DF[-1][2], val_DF[-1][3], val_5, n, i+1, g)))
+
+    val_DF = val_DF[1:]
+
+
 
     #calculate region 7
     #similar to 5

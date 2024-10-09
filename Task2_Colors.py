@@ -96,7 +96,7 @@ def Reg_6_colors (val_5, val_7, n):
 
     for i in range(n):
         x_6 = np.linspace(val_5[i][-1][4], val_7[0][i][4], m+2)[1:-1]
-        slope = math.tan(val_5[i][-1][2]+val_5[i][-1][3])
+        slope = math.tan((val_5[i][-1][2]+val_5[i][-1][3]+val_7[0][i][2]+val_7[0][i][3])/2)
         for j in range(m):
             y_6 = slope*(x_6[j]-val_5[i][-1][4]) + val_5[i][-1][5]
             Val_6[i*m+j] = np.append(val_5[i][-1][:4], [x_6[j], y_6])

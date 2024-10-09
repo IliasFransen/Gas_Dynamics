@@ -32,6 +32,22 @@ def pointHK(x_H, y_H, mu_H, V_plus_H, phi_H, x_a, y_a, mu_a, phi_a, V_min_a, g):
     y_p = slope_a*(x_p-x_a)+y_a
     return x_p, y_p
 
+def point_HK_new (x_B, y_B, nu_B, M_B, phi_B, mu_B, val_7, n, i, g):
+    nu_p = (val_7[i][-1][0]+val_7[i][-1][2] + nu_B-phi_B)/2
+    phi_p = (val_7[i][-1][0]+val_7[i][-1][2] - (nu_B - phi_B))/2
+    M_p = mach_number_nu(nu_p,g)
+    mu_p = math.asin(1/M_p)
+    #get slopes of a and d
+    slope_B = math.tan((mu_B+mu_p+phi_B+phi_p)/2)
+    slope_7 = math.tan((-mu_p-val_7[i][-1][3]+phi_p+val_7[i][-1][2])/2)
+    #get intersection point
+    x_p = (slope_B*x_B-y_B-slope_7*val_7[i][-1][4]+val_7[i][-1][5])/(slope_B-slope_7)
+    y_p = slope_B*(x_p-x_B)+y_B
+
+    return  nu_p, M_p, phi_p, mu_p, x_p, y_p
+
+    return  nu_p, M_p, phi_p, mu_p, x_p, y_p
+
 #find points in region 9
 #c is a point above a on the same char.
 #literal copy of 5

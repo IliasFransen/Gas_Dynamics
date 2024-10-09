@@ -14,15 +14,6 @@ def coord_D (Gamma_plus_angle_1, x_C, y_C, y_A, x_A, phi_1):
     y_D = boundary_slope*(x_D-x_A)+y_A
     return x_D, y_D
 
-#find values along DF
-def point_DF (x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a):
-    #use the point a, where characteristics meet line CE
-    slope_a = math.tan(Gamma_plus_angle_a)
-    slope_D = math.tan(Gamma_min_angle_1)
-    #calculate x and y in p, where both slopes meet (approx)
-    x_p = (y_a-y_D+slope_D*x_D-x_a*slope_a)/(slope_D-slope_a)
-    y_p = slope_a*(x_p-x_a)+y_a
-    return x_p, y_p
 
 def point_DF_new (x_B, y_B, nu_B, M_B, phi_B, mu_B, val_5, n, i, g):
     nu_p = (val_5[i][-1][0]-val_5[i][-1][2] + nu_B+phi_B)/2

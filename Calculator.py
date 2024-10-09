@@ -5,9 +5,9 @@ from scipy.optimize import fsolve
 
 from Task2_Functions import total_pressure
 from Task2_Regions import region_0, region_1, region_2, region_3
-from Task2_Fans4_5 import coord_B, region4, point_BC, region5_sym, region5_gen, point_BC_new
-from Task2_Fans6_7 import coord_D, point_DF, region7_sym, region7_gen, point_DF_new
-from Task2_Fans8_9 import region9_gen, region9_sym, coord_H, pointHK
+from Task2_Fans4_5 import coord_B, region4, region5_sym, region5_gen, point_BC_new
+from Task2_Fans6_7 import coord_D, region7_sym, region7_gen, point_DF_new
+from Task2_Fans8_9 import region9_gen, region9_sym, coord_H, pointHK, point_HK_new
 
 
 
@@ -75,13 +75,7 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
 #DO LIKE BC
 
     #get values in DF
-    #take last column of 5, swap x and y with location from function
-    val_DF = np.zeros((n,6))
-
-    for i in range(n):
-        #x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a
-        val_DF[i] = (np.hstack((val_5[i][-1][0:-2],point_DF(x_D, y_D, Val_1[6], val_5[i][-1][-2],val_5[i][-1][-1],val_5[i][-1][2]+val_5[i][-1][3])) ))
-
+    
     val_DF = np.array(point_DF_new(x_D, y_D, Val_1[0], Val_1[1], Val_1[2], Val_1[3], val_5, n, 0, g))
     val_DF = np.vstack((val_DF,np.array(point_DF_new(x_D, y_D, Val_1[0], Val_1[1], Val_1[2], Val_1[3], val_5, n, 0, g))))
     for i in range(n-1):
@@ -125,6 +119,11 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
         #x_H, y_H, mu_H, V_plus_H, phi_H, x_a, y_a, mu_a, phi_a, V_min_a, g
         val_HK [i+1] = np.hstack((val_7[i+1][-1][0:-2],pointHK(x_H, y_H, Val_2[3], Val_2[5], Val_2[2], val_7[i+1][-1][4], val_7[i+1][-1][5], val_7[i+1][-1][3], val_7[i+1][-1][2], val_7[i+1][-1][0]+val_7[i+1][-1][2], g) ))
 
+    val_HK = np.array(point_HK_new(x_H, y_H, Val_2[0], Val_2[1], Val_2[2], Val_2[3], val_7, n, 0, g))
+    val_HK = np.vstack((val_HK,np.array(point_HK_new(x_H, y_H, Val_2[0], Val_2[1], Val_2[2], Val_2[3], val_7, n, 0, g))))
+    for i in range(n-1):
+        val_HK = np.vstack((val_HK, point_HK_new(val_HK[-1][4], val_HK[-1][5], val_HK[-1][0], val_HK[-1][1], val_HK[-1][2], val_HK[-1][3], val_7, n, i+1, g)))
+    val_HK = val_HK[1:]
 
     #calculate region 9
     #similar to 5

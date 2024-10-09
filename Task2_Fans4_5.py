@@ -23,11 +23,6 @@ def coord_B(y_A, Gamma_min_angle_0):
 
 #calculate a point on BC
 #B is just the previous point, moves along with the characteristics
-def point_BC (x_B, y_B, y_A, x_A, delta_p, Gamma_plus_angle_0):
-
-    x_P = (y_B - y_A + math.tan(delta_p)*x_A-math.tan(Gamma_plus_angle_0)*x_B)/(-math.tan(Gamma_plus_angle_0)+math.tan(delta_p))
-    y_P = math.tan(delta_p)*(x_P-x_A)+y_A
-    return x_P, y_P
 
 def point_BC_new (x_B, y_B, nu_B, M_B, phi_B, mu_B, y_A, x_A, val_4, n, i, g):
     nu_p = (val_4[i][0]+val_4[i][2] + nu_B-phi_B)/2
@@ -43,10 +38,6 @@ def point_BC_new (x_B, y_B, nu_B, M_B, phi_B, mu_B, y_A, x_A, val_4, n, i, g):
     return  nu_p, M_p, phi_p, mu_p, x_p, y_p
     
 
-#does move with nonlinear shit
-
-#print(point_BC(1,0,1,0,0.5,0.5)) CHECK
-
 #calculate a point in 5, on the symmetry line
 #c is a point above a on the char.
 def region5_sym (x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c):
@@ -56,8 +47,6 @@ def region5_sym (x_c, y_c, y_a, V_min_c, phi_a,g, mu_c, phi_c):
     slope_ca = math.tan((-mu_a-mu_c+phi_c+phi_a)/2)
     x_a = ((y_a-y_c)/slope_ca+x_c)
     return nu_a, M_a, 0, mu_a, x_a, y_a
-
-
 
 #calculate a point in 5, NOT on the symmetry line
 #d is above, a is below

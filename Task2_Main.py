@@ -7,8 +7,8 @@ import seaborn as sns
 
 from Task2_Functions import total_pressure, mach_number_pres, mach_angle, prandtl_meyer_angle, func, mach_number_nu, V_plus, V_min, Gamma_plus_angle, Gamma_min_angle
 from Task2_Regions import region_0, region_1, region_2, region_3
-from Task2_Fans4_5 import coord_B, region4, point_BC, region5_sym, region5_gen
-from Task2_Fans6_7 import coord_D, point_DF, region7_sym, region7_gen
+from Task2_Fans4_5 import coord_B, region4, region5_sym, region5_gen
+from Task2_Fans6_7 import coord_D, region7_sym, region7_gen
 from Task2_Fans8_9 import region9_gen, region9_sym, coord_H, pointHK
 from Task2_Lines import Lines
 from Calculator import Calculator

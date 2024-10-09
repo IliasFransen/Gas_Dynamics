@@ -72,6 +72,7 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
     #Gamma_plus_angle_1, x_C, y_C, y_A, x_A, phi_1
     x_D, y_D = coord_D(Val_1[7], val_5[0][-1][4], val_5[0][-1][5], y_A, x_A, Val_1[2])
 
+#DO LIKE BC
 
     #get values in DF
     #take last column of 5, swap x and y with location from function
@@ -83,7 +84,6 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
 
     #calculate region 7
     #similar to 5
-    #LOOPS WRONG WAY AAAAAAAAAAAAAAA
 
     val_7 = np.zeros((n,n,6))
     #first row is just DF
@@ -101,8 +101,6 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
                 #x_a, y_a, x_d, y_d, V_min_a, V_plus_d, mu_a, g, phi_a, phi_d, mu_d
                 val_7[j][i] = np.array(region7_gen(val_7[j][i-1][4], val_7[j][i-1][5], val_7[j-1][i][4], val_7[j-1][i][5], val_7[j][i-1][0]+val_7[j][i-1][2], val_7[j-1][i][0]-val_7[j-1][i][2], val_7[j][i-1][3], g, val_7[j][i-1][2], val_7[j-1][2][2], val_7[j-1][i][3]))
 
-    
-    print(val_7)
 
     #calculate location of H
     #Gamma_min_angle_2, x_F, y_F, y_H

@@ -25,8 +25,8 @@ def point_DF (x_D, y_D, Gamma_min_angle_1, x_a, y_a, Gamma_plus_angle_a):
     return x_p, y_p
 
 def point_DF_new (x_B, y_B, nu_B, M_B, phi_B, mu_B, val_5, n, i, g):
-    nu_p = (val_5[i][-1][0]+val_5[i][-1][2] + nu_B-phi_B)/2
-    phi_p = (val_5[i][-1][0]+val_5[i][-1][2] - (nu_B - phi_B))/2
+    nu_p = (val_5[i][-1][0]-val_5[i][-1][2] + nu_B+phi_B)/2
+    phi_p = (-val_5[i][-1][0]+val_5[i][-1][2] + (nu_B + phi_B))/2
     M_p = mach_number_nu(nu_p,g)
     mu_p = math.asin(1/M_p)
     #get slopes of a and d

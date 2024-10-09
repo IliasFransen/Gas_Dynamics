@@ -50,6 +50,8 @@ def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n)
     Reg_9_colors(val_9,n)
     Reg_3_color(m, Val_3, val_7, val_9)
 
+    print(val_5)
+
     if lines:
         Lines(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A)
 

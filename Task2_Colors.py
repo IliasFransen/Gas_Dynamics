@@ -154,7 +154,7 @@ def Reg_9_colors (val_9,n):
     
         return x_9, y_9, M_9
 
-def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n):
+def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n, Region_9: bool):
 
     m = 100
     x = np.array([])
@@ -169,16 +169,24 @@ def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n)
     x_6, y_6, M_6 = Reg_6_colors(val_5, val_7, n)
     x_7, y_7, M_7 = Reg_7_colors(val_7,n)
     x_8, y_8, M_8 = Reg_8_colors(val_7, val_9, n)
-    x_9, y_9, M_9 = Reg_9_colors(val_9,n)
+    
 
 
-    x = np.concatenate((x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9))
-    y = np.concatenate((y_0, y_1, y_2, y_3, y_4, y_5, y_6, y_7, y_8, y_9))
-    M = np.concatenate((M_0, M_1, M_2, M_3, M_4, M_5, M_6, M_7, M_8, M_9))
+    x = np.concatenate((x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8))
+    y = np.concatenate((y_0, y_1, y_2, y_3, y_4, y_5, y_6, y_7, y_8))
+    M = np.concatenate((M_0, M_1, M_2, M_3, M_4, M_5, M_6, M_7, M_8))
+
+    if Region_9:
+        x_9, y_9, M_9 = Reg_9_colors(val_9,n)
+        x = np.concatenate((x, x_9))
+        y = np.concatenate((y, y_9))
+        M = np.concatenate((M, M_9))
+
+
 
     triang = tri.Triangulation(x, y)
 
     fig1, ax1 = plt.subplots()
     ax1.set_aspect('equal')
-    tcf = ax1.tricontourf(triang, M, 50)
+    tcf = ax1.tricontourf(triang, M, 50, cmap = 'prism')
     fig1.colorbar(tcf, orientation='horizontal', label = 'Mach number [-]')

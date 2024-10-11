@@ -34,7 +34,7 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A, 
         #region 6
 
         #get 5 x-points again
-        x_6 = np.linspace(val_5[i][-1][4], val_7[0][i][4], 5+1, endpoint = False)[1:]
+        x_6 = np.linspace(val_5[i][-1][4], val_7[0][i][4], 5+1, endpoint = False)
 
         #get slope of 6
 
@@ -61,7 +61,7 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A, 
 
         #get 5 x-points again
 
-        x_8 = np.linspace(val_7[i][-1][4], val_9[0][i][4], 5+1, endpoint = False)[1:]
+        x_8 = np.linspace(val_7[i][-1][4], val_9[0][i][4], 50+1, endpoint = False)[1:]
 
         #get slope of 8
 

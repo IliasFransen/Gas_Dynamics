@@ -15,9 +15,9 @@ y_A = 1      #nozzle height (m)
 x_A = 0      #nozzle end (m)
 
 #number of lines in fans (including edges)
-n=15
+n=105
 plot = True
-lines = True
+lines = False
 region_9 = False
 pressure = True
     

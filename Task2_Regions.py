@@ -1,4 +1,3 @@
-
 from Task2_Functions import mach_number_pres, mach_angle, prandtl_meyer_angle, mach_number_nu, V_plus, V_min, Gamma_plus_angle, Gamma_min_angle
 
 #################################################CALCULATE UNIFORM REGIONS#################################################
@@ -13,8 +12,6 @@ def region_0(M_0,phi_0,g,P_0):
     Gamma_plus_angle_0 = Gamma_plus_angle(phi_0,mu_0)
     return nu_0, M_0, phi_0, mu_0, V_min_0, V_plus_0, Gamma_min_angle_0, Gamma_plus_angle_0
 
-#print(region_0(2,0,1.4,2*101325)) CHECK
-
 #calculate region 1
 def region_1(P_a,V_plus_0,P_t_0,g):
     M_1 = mach_number_pres(P_t_0, P_a,g)
@@ -27,8 +24,6 @@ def region_1(P_a,V_plus_0,P_t_0,g):
     mu_1 = mach_angle(M_1)
     return nu_1, M_1, phi_1, mu_1, V_min_1, V_plus_1, Gamma_min_angle_1, Gamma_plus_angle_1
 
-#print(region_1(101325,0.460,1585624,1.4)) CHECK
-
 #calculate region 2
 def region_2(phi_2,V_min_1,g):
     nu_2 = V_min_1 + phi_2
@@ -39,8 +34,6 @@ def region_2(phi_2,V_min_1,g):
     Gamma_min_angle_2 = Gamma_min_angle(phi_2,mach_angle(M_2))
     mu_2 = mach_angle(M_2)
     return nu_2, float(M_2), phi_2, mu_2, V_min_2, V_plus_2, Gamma_min_angle_2, Gamma_plus_angle_2
-
-#print(region_2(0,0.8592,1.4)) CHECK
 
 #calculate region 3
 def region_3(V_plus_2,P_a,P_t_0,g):
@@ -53,6 +46,4 @@ def region_3(V_plus_2,P_a,P_t_0,g):
     V_plus_3 = V_plus(phi_3,nu_3)
     V_min_3 = V_min(phi_3,nu_3)
     return nu_3, M_3, phi_3, mu_3, V_min_3, V_plus_3, Gamma_min_angle_3, Gamma_plus_angle_3
-
-#print(region_3(0.8592,101325,1585624,1.4)) CHECK
 

@@ -2,8 +2,6 @@ import math
 
 from Task2_Functions import mach_number_nu, V_plus, V_min, Gamma_min_angle
 
-
-
 #find location of H
 #location on y=0
 #follow Gamma-2 out of F

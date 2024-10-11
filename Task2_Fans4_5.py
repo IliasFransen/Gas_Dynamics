@@ -1,8 +1,6 @@
 import math
 
 from Task2_Functions import mach_number_nu
-
-
     
 #calculate any point in 4
 def region4 ( V_plus_0, g, phi_p):
@@ -18,7 +16,6 @@ def coord_B(y_A, Gamma_min_angle_0):
     x_B = (0-y_A)/math.tan(Gamma_min_angle_0)
     y_B = 0
     return x_B, y_B
-
 
 
 #calculate a point on BC

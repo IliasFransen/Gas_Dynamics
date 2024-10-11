@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-
 def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A, Region_9: bool):
 
     #plot characteristics
@@ -94,10 +93,6 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A, 
                 y_9 = np.append(y_9, val_9[i][j][5])
             
             x = np.concatenate((x, x_9))
-            y = np.concatenate((y, y_9))
-        
-        #create one long array for x and y
-
-        
+            y = np.concatenate((y, y_9))        
 
         plt.plot(x, y, color = 'black')

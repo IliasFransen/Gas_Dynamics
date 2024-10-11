@@ -2,9 +2,6 @@ import math
 
 from Task2_Functions import mach_number_pres, prandtl_meyer_angle, mach_number_nu, V_plus, V_min
 
-
-
-
 #find the coordinate of D
 def coord_D (Gamma_plus_angle_1, x_C, y_C, y_A, x_A, phi_1):
     #intersection of G+ from C and (straight) boundary starting in A

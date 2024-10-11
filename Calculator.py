@@ -1,15 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import math
-from scipy.optimize import fsolve
 
 from Task2_Functions import total_pressure
 from Task2_Regions import region_0, region_1, region_2, region_3
 from Task2_Fans4_5 import coord_B, region4, region5_sym, region5_gen, point_BC_new
 from Task2_Fans6_7 import coord_D, region7_sym, region7_gen, point_DF_new
 from Task2_Fans8_9 import region9_gen, region9_sym, coord_H, pointHK, point_HK_new
-
-
 
 def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
 

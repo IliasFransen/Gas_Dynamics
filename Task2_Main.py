@@ -19,9 +19,9 @@ n=105
 plot = True
 lines = False
 region_9 = False
-pressure = True
-    
-        
+pressure = False
+
+###########################################################################################################################################   
 
 def Main():
     Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, p_t_0 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
@@ -37,8 +37,6 @@ def Main():
 
     if plot:
         plt.show()
-    
-
     
 if __name__ == "__main__":
     Main()

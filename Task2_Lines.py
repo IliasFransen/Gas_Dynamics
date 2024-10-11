@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import math
 
 
-def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
+def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A, Region_9: bool):
 
     #plot characteristics
     for i in range(n):
@@ -70,28 +70,34 @@ def Lines (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A):
 
         y_8 = gamma_min_slope_8*(x_8-val_7[i][-1][4])+val_7[i][-1][5]
 
+        x = np.concatenate((x_4, x_5, x_6, x_7, x_8))
+        y = np.concatenate((y_4, y_5, y_6, y_7, y_8))
+
         #region 9
 
         #isolate x and y out of 9 array
 
-        x_9 = np.array([])
-        y_9 = np.array([])
+        if Region_9:
+            x_9 = np.array([])
+            y_9 = np.array([])
 
-        x_9 = np.array([])
-        y_9 = np.array([])
+            x_9 = np.array([])
+            y_9 = np.array([])
 
-        for j in range(i):
-            x_9 = np.append(x_9, val_9[j][i][4])
-            y_9 = np.append(y_9, val_9[j][i][5])
+            for j in range(i):
+                x_9 = np.append(x_9, val_9[j][i][4])
+                y_9 = np.append(y_9, val_9[j][i][5])
 
 
-        for j in range(i,n):
-            x_9 = np.append(x_9, val_9[i][j][4])
-            y_9 = np.append(y_9, val_9[i][j][5])
+            for j in range(i,n):
+                x_9 = np.append(x_9, val_9[i][j][4])
+                y_9 = np.append(y_9, val_9[i][j][5])
+            
+            x = np.concatenate((x, x_9))
+            y = np.concatenate((y, y_9))
         
         #create one long array for x and y
 
-        x = np.concatenate((x_4, x_5, x_6, x_7, x_8, x_9))
-        y = np.concatenate((y_4, y_5, y_6, y_7, y_8, y_9))
+        
 
         plt.plot(x, y, color = 'black')

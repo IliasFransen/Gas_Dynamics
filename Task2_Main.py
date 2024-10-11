@@ -15,24 +15,25 @@ y_A = 1      #nozzle height (m)
 x_A = 0      #nozzle end (m)
 
 #number of lines in fans (including edges)
-n=70
+n=15
 plot = True
-lines = False
+lines = True
 region_9 = False
+pressure = True
     
         
 
 def Main():
-    Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
+    Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, p_t_0 = Calculator(M_0, phi_0, g, P_a, n, x_A, y_A)
     
-    colors(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n, region_9)
+    colors(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, p_t_0, n, region_9, pressure)
 
     if lines:
-        Lines(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A)
+        Lines(Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, n, x_A, y_A, region_9)
 
     plt.xlabel("x-coordinate [m]")
     plt.ylabel("y-coordinate [m]")
-    plt.title('Mach number distribution in an overexpanded nozzle at M_exit = 2')
+    
 
     if plot:
         plt.show()

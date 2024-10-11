@@ -147,4 +147,4 @@ def Calculator(M_0, phi_0, g, P_a, n, x_A, y_A):
                 val_9[j][i] = np.array(region9_gen(val_9[j][i-1][4], val_9[j][i-1][5], val_9[j-1][i][4], val_9[j-1][i][5], val_9[j][i-1][0]-val_9[j][i-1][2], val_9[j-1][i][0] + val_9[j-1][i][2], val_9[j][i-1][3], g, val_9[j][i-1][2], val_9[j-1][i][2], val_9[j-1][i][3]))
      
 
-    return Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9
+    return Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, P_t_0

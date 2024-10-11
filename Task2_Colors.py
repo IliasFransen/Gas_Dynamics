@@ -154,7 +154,7 @@ def Reg_9_colors (val_9,n):
     
         return x_9, y_9, M_9
 
-def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n, Region_9: bool):
+def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, p_t_0, n, Region_9: bool, Pressure: bool):
 
     m = 100
     x = np.array([])
@@ -174,19 +174,28 @@ def colors (Val_0, Val_1, Val_2, Val_3, val_4, val_5, val_7, val_9, x_A, y_A, n,
 
     x = np.concatenate((x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8))
     y = np.concatenate((y_0, y_1, y_2, y_3, y_4, y_5, y_6, y_7, y_8))
-    M = np.concatenate((M_0, M_1, M_2, M_3, M_4, M_5, M_6, M_7, M_8))
+    z = np.concatenate((M_0, M_1, M_2, M_3, M_4, M_5, M_6, M_7, M_8))
 
     if Region_9:
         x_9, y_9, M_9 = Reg_9_colors(val_9,n)
         x = np.concatenate((x, x_9))
         y = np.concatenate((y, y_9))
-        M = np.concatenate((M, M_9))
-
-
+        z = np.concatenate((z, M_9))
 
     triang = tri.Triangulation(x, y)
 
     fig1, ax1 = plt.subplots()
     ax1.set_aspect('equal')
-    tcf = ax1.tricontourf(triang, M, 50, cmap = 'prism')
-    fig1.colorbar(tcf, orientation='horizontal', label = 'Mach number [-]')
+
+    if Pressure:
+        z = p_t_0 * (1 + (1.4-1)/2 * z**2)**(-1.4/(1.4-1))
+        plt.title('Static pressure distribution in an overexpanded nozzle at M_exit = 2')
+        tcf = ax1.tricontourf(triang, z, 50, cmap = 'plasma')
+        fig1.colorbar(tcf, orientation='horizontal', label = 'Static Pressure [Pa]')
+    else:
+        plt.title('Mach number distribution in an overexpanded nozzle at M_exit = 2')
+        tcf = ax1.tricontourf(triang, z, 50, cmap = 'plasma')
+        fig1.colorbar(tcf, orientation='horizontal', label = 'Mach number [-]')
+        
+    
+    

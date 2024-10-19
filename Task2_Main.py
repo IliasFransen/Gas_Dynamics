@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 from Task2_Lines import Lines
-from Calculator import Calculator
+from Task2_Calculator import Calculator
 from Task2_Colors import colors
 
 #define variables
